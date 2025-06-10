@@ -20,7 +20,7 @@ class StringCalculator
     end
 
     validate_negatives(numbers)
-    use_multiplication? ? numbers.inject(:*) : numbers.sum
+    numbers.sum
   end
 
   private
@@ -60,9 +60,5 @@ class StringCalculator
   def validate_negatives(numbers)
     negatives = numbers.select { |n| n < 0 }
     raise "Negatives not allowed: #{negatives.join(', ')}" if negatives.any?
-  end
-
-  def use_multiplication?
-    @custom_delimiters.size == 1 && @custom_delimiters.first == "*"
   end
 end
