@@ -5,4 +5,6 @@ source "https://rubygems.org"
 gem 'rspec'
 gem 'byebug'
 gem 'sinatra'
+gem 'puma'
+gem 'rackup'
 gem 'sinatra-cross_origin'
