@@ -7,5 +7,9 @@ RSpec.describe StringCalculator do
     it 'returns 0 for empty' do
       expect(StringCalculator.new("").add).to eq(0)
     end
+
+    it 'returns a number itself if input contains a single number' do
+      expect(StringCalculator.new("1").add).to eq(1)
+    end
   end
 end
