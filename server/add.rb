@@ -9,6 +9,13 @@ class StringCalculator
     if @input.start_with?("//")
       delimiter_line, numbers_part = @input.split("\n", 2)
       delimiter = delimiter_line[2..]
+
+      # Check for any characters other than digits, delimiter, or minus sign
+      valid_pattern = Regexp.escape(delimiter)
+      unless numbers_part.scan(/[^0-9\-#{valid_pattern}]/).empty?
+        raise "Invalid delimiter used in input. Only allowed delimiters: #{delimiter}"
+      end
+
       parts = numbers_part.split(delimiter)
     else
       parts = @input.gsub("\n", ',').split(',')

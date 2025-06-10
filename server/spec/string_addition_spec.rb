@@ -36,5 +36,8 @@ RSpec.describe StringCalculator do
     it 'allows input with custom delimiter' do
       expect(StringCalculator.new("//;\\n1;2").add).to eq(3)
     end
+    it 'allows input with custom delimiter and ignores non-matching tokens' do
+      expect {StringCalculator.new("//;\\n1XY;2_+3(4)$5").add}.to raise_error("Invalid delimiter used in input. Only allowed delimiters: ;")
+    end
   end
 end
