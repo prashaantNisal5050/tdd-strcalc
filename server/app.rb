@@ -4,9 +4,14 @@ require 'json'
 require 'sinatra/cross_origin'
 require_relative './add'
 require 'byebug'
+set :public_folder, File.expand_path('../../client/build', __FILE__)
 
 configure do
   enable :cross_origin
+end
+
+get '/' do
+  send_file File.join(settings.public_folder, 'index.html')
 end
 
 before do
