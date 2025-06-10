@@ -17,5 +17,11 @@ RSpec.describe StringCalculator do
     it 'returns sum of all numbers if input contains comma separated numbers' do
       expect(StringCalculator.new("1, 2, 3, 4, 5").add).to eq(15)
     end
+    it 'returns sum of two numbers if input contains new line in between two numbers' do
+      expect(StringCalculator.new("1\n2").add).to eq(3)
+      expect(StringCalculator.new("\n2,1").add).to eq(3)
+      expect(StringCalculator.new("1,2\n").add).to eq(3)
+      expect(StringCalculator.new("1\n,2,3\n4,5").add).to eq(15)
+    end
   end
 end
