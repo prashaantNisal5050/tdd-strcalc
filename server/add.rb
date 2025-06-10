@@ -6,11 +6,13 @@ class StringCalculator
   def add
     return 0 if @input.empty?
 
-    # Replace newline with comma and split by comma
-    numbers = @input.gsub("\n", ',').split(',')
-                    .map(&:strip)
-                    .reject(&:empty?)
-                    .map(&:to_i)
+    numbers = @input
+                .gsub("\n", ',')
+                .split(',')
+                .map(&:strip)
+                .reject(&:empty?)
+                .map(&:to_i)
+                .reject { |n| n > 1000 }
 
     numbers.sum
   end
