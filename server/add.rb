@@ -1,21 +1,26 @@
 class StringCalculator
   def initialize(input)
-    @input = input.strip
+    @input = input.strip.gsub("\\n", "\n")
   end
 
   def add
     return 0 if @input.empty?
 
-    numbers = @input
-                .gsub("\n", ',')
-                .split(',')
-                .map(&:strip)
-                .reject(&:empty?)
-                .map(&:to_i).reject { |n| n > 1000 }
+    if @input.start_with?("//")
+      delimiter_line, numbers_part = @input.split("\n", 2)
+      delimiter = delimiter_line[2..]
+      parts = numbers_part.split(delimiter)
+    else
+      parts = @input.gsub("\n", ',').split(',')
+    end
+
+    numbers = parts.map(&:strip)
+                   .reject(&:empty?)
+                   .map(&:to_i)
 
     negatives = numbers.select { |n| n < 0 }
     raise "Negatives not allowed: #{negatives.join(', ')}" if negatives.any?
 
-    numbers.sum
+    numbers.reject { |n| n > 1000 }.sum
   end
 end
