@@ -16,8 +16,9 @@ end
 
 # Handle all other client-side routes (for SPA routing)
 get '/*' do
-  if File.exist?(File.join(settings.public_folder, request.path_info))
-    send_file File.join(settings.public_folder, request.path_info)
+  path = File.join(settings.public_folder, request.path_info)
+  if File.exist?(path) && !File.directory?(path)
+    send_file path
   else
     send_file File.join(settings.public_folder, 'index.html')
   end
