@@ -10,7 +10,6 @@ function App() {
       process.env.NODE_ENV === "development"
         ? "http://localhost:4567/add"
         : "/add";
-        : "/add";
 
       
       const response = await fetch(API_URL, {
