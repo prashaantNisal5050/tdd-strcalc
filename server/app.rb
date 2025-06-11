@@ -20,6 +20,7 @@ get '/*' do
   if File.exist?(path) && !File.directory?(path)
     send_file path
   else
+    content_type 'text/html' 
     send_file File.join(settings.public_folder, 'index.html')
   end
 end
